@@ -1,13 +1,15 @@
 from fpdf import FPDF
 from pandas import read_csv
 
-
+# Load topics into df
 df = read_csv('topics.csv')
 
+# Create fpdf instance
 pdf = FPDF()
 pdf.set_auto_page_break(False)
 
 for index, row in df.iterrows():
+    # Add first topic page
     pdf.add_page()
     #Set the topic title
     pdf.set_font('Arial', 'B', 16)
@@ -23,6 +25,7 @@ for index, row in df.iterrows():
     pdf.set_text_color(180, 180, 180)
     pdf.cell(0, 10, row['Topic'],0, 0,'R')
     for i in range(row['Pages'] - 1):
+        # Add x numbers of pages to the topic
         pdf.add_page()
         #Set inner lines in page
         for y in range(21, 291, 10):
